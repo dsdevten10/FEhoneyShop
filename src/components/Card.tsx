@@ -1,21 +1,36 @@
-
+import type { Product } from "../pages/Home";
 
 interface CardProps {
-    image: string; 
-    title: string; 
-    price:string;
+  item: Product;
 }
 
-export default function Card({image, title, price}: CardProps){
-return (
-<div className="relative w-48 h-64 border rounded-lg overflow-hidden shadow-lg group ">
-<img src={image} alt={title} className="w-full h-40 object-cover" />
+// Card prodotto
+const Card = ({ item }: CardProps) => {
+  return (
+    <div className="relative w-48 h-64 border rounded-xl overflow-hidden shadow-md group cursor-pointer">
+      {/* Immagine */}
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-40 object-cover"
+      />
 
-<div className="p-2 flex flex-col gap-1">
-    <h3 className="font-bold text-lg">{title}</h3>
-    <p className="text-gray-700">{price}</p>
-</div>
-<button className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold opacity-0 group-hover:opacity-100 transition-opacity">Add to Card</button>
-</div>
-);
-}
+      {/* Info prodotto */}
+      <div className="p-2 flex flex-col gap-1">
+        <h3 className="font-semibold text-lg">{item.title}</h3>
+        <p className="text-gray-800 font-medium">{item.price.toFixed(2)} €</p>
+      </div>
+
+      {/* Overlay add to cart */}
+      <button
+        className="absolute inset-0 flex items-center justify-center 
+                   bg-black/50 text-white font-medium opacity-0 
+                   group-hover:opacity-100 transition-opacity"
+      >
+        Add to Cart
+      </button>
+    </div>
+  );
+};
+
+export default Card;

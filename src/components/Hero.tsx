@@ -1,39 +1,37 @@
 import { useState, useEffect } from "react";
 
 interface HeroProps {
-    images: string[];
-    headings?: string[];
-    interval?: number;
+  images: string[];
+  headings?: string[];
+  interval?: number;
 }
 
-export default function Hero({images, headings = [], interval = 2000}:HeroProps) {
+// Hero rotante immagini
+const Hero = ({ images, headings = [], interval = 3000 }: HeroProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [currentImage, setCurrentImage] = useState<string>(images[0]);
+  useEffect(() => {
+    if (!images.length) return;
 
- useEffect(() => {
-  const intervalId = setInterval(() => {
-    setCurrentImage(prev => {
-      let next;
-      do {
-        next = images[Math.floor(Math.random() * images.length)];
-      } while (next === prev && images.length > 1); // evita ripetizioni consecutive
-      return next;
-    });
-  }, interval);
+    const timer = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % images.length);
+    }, interval);
 
-  return () => clearInterval(intervalId); // cleanup per evitare memory leak
-}, [images, interval]);
-
+    return () => clearInterval(timer);
+  }, [images, interval]);
 
   return (
     <section
-      className="h-[300px] md:h-[400px] bg-cover bg-center bg-no-repeat transition-opacity flex flex-col items-center justify-center text-white"
-      style={{ backgroundImage: `url(${currentImage})` }}
+      className="h-[300px] md:h-[400px] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center text-white transition-opacity"
+      style={{ backgroundImage: `url(${images[currentIndex]})` }}
     >
-        {headings.map((text, index)=> (
-            <h3 key={index} className="text-lg md:text-2x1">{text}</h3>
-        ))}
-    
+      {headings.map((text, idx) => (
+        <h3 key={idx} className="text-xl md:text-2xl font-semibold drop-shadow-sm">
+          {text}
+        </h3>
+      ))}
     </section>
   );
-}
+};
+
+export default Hero;
