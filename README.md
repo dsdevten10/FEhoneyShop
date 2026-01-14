@@ -1,3 +1,5 @@
+0. run the front end npm run dev
+
 1. creo la struttura
 frontend/
 ├── src/
@@ -34,6 +36,8 @@ src/
 compila il codice in maniera piu veloce rispetto a 
 serve solo i fil che il browser necessita in quel momento , anziche CRA webpack che impacchettava tutto e renderizzava 
 # FEhoneyshop
-# FEhoneyshop
-# FEhoneyshop
-# FEhoneyShop
+creazione della respository solo per il front end 
+voglio separare le due cartelle per non andare in contro a problemi futuri sopratutto se il progetto e molto grande 
+
+# feature branch git - github 
+ho creato feature branch pero per qualche strano motivo non riesco a vedere il carousel 
